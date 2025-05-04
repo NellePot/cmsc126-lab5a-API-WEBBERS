@@ -1,33 +1,38 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dota 2 Characters</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dota 2 Characters</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <input type="text" id="dotaHero" placeholder="Enter Hero Name">
-    <button onclick="fetchData()">Fetch hero</button><br>
-    
-    <h2>Name</h2>
-    <div id="hero"></div> 
-    <br>
+  <h1 id="logo"> DOTA 2 </h1>
 
-    <h2>Image</h2>
-    <img src="" alt="dotaImg" id="heroImg" style="display: none">
-    <br>
+  <h1>CHOOSE YOUR HERO</h1>
+  <div class="search-container">
+    <input type="text" id="dotaHero" placeholder="Enter Hero Name" />
+    <button onclick="fetchData()">Fetch Hero</button>
+  </div>
 
-    <div class="roles">
-        <h2> Roles </h2>
+  <div id="hero-info">
+    <h2 id="hero"></h2>
+    <div class="hero-details">
+      <img src="" alt="Hero Image" id="heroImg" />
+      <div class="roles">
         <ul id="rolesList"></ul>
+      </div>
     </div>
-    <br> 
+  </div>
+  
 
-    <h2>All heroes</h2>
+  <div class=allCharacters>
+    <h2 style="text-align: center;">All Heroes</h2>
     <div id="all"></div>
+  </div>
 
-    <script src="fetch.js"></script>
+  <script src="fetch.js"></script>
 </body>
 </html>
