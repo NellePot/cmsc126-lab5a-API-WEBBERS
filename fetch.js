@@ -3,19 +3,17 @@ let allHeroData = [];
 async function fetchData(){
 
     try{
-
+        // get hero name from input
         const dotaHeroName = document.getElementById("dotaHero").value.trim(); 
-
-        //const response = await fetch(`https://api.opendota.com/api/heroes`);
-
+        // fetch dota2 api for hero stats
         const response = await fetch(`https://api.opendota.com/api/heroStats`); 
 
         if(!response.ok){
             throw new Error("Could not fetch resource"); 
         }
-
+        // convert json
         const data = await response.json();
-
+        // hero is the data of the localized_name attribute
         const hero = data.find(h => h.localized_name.toLowerCase() === dotaHeroName.toLowerCase()); 
 
         if(!hero){
@@ -24,11 +22,13 @@ async function fetchData(){
 
         document.getElementById("hero-info").style.display = "block";
     
+        // get name, img, and role from hero data
         console.log(data); 
         const nameHero = hero.localized_name
         const imgHero = hero.img 
         const roleHero = hero.roles
 
+        
         const heroElement = document.getElementById("hero")
         heroElement.textContent = nameHero
 
