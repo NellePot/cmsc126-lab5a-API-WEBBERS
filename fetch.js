@@ -21,6 +21,8 @@ async function fetchData(){
         if(!hero){
             throw new Error("Hero not found"); 
         }
+
+        document.getElementById("hero-info").style.display = "block";
     
         console.log(data); 
         const nameHero = hero.localized_name
@@ -69,13 +71,17 @@ async function showAllHeroes(){
             const heroImg = document.createElement("img");
             heroImg.src = `http://cdn.dota2.com/${hero.img}`; 
             heroImg.alt = hero.localized_name;
-            heroImg.style.width = "100px"; 
+            
+            const overlay = document.createElement("div");
+            overlay.className = "overlay";
 
-            const heroName = document.createElement("p");
-            heroName.textContent = hero.localized_name;
+            const text = document.createElement("p");
+            text.className = "text";
+            text.textContent = hero.localized_name;
 
+            overlay.appendChild(text);
             heroBox.appendChild(heroImg);
-            heroBox.appendChild(heroName);
+            heroBox.appendChild(overlay);
             container.appendChild(heroBox);
         });
     } catch(error){
