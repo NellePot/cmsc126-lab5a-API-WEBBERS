@@ -4,17 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dota 2 Characters</title>
+  <link rel="icon" href="dota-2-icon.png" type="image/x-icon">
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <h1 id="logo"> DOTA 2 </h1>
+  <div id="logo">
+    <img src="dota-2-icon.png" alt="Dota 2 Logo">
+    <h1>Dota 2 Heroes</h1>
+  </div>
 
   <h1>CHOOSE YOUR HERO</h1>
   <div class="search-container">
     <input type="text" id="dotaHero" placeholder="Enter hero name" />
-    <button onclick="fetchData()">fetch</button>
+    <button onclick="fetchData()">Fetch Hero</button>
+    <p id="errorMssg" style="color: red; text-align: center;"></p>
   </div>
 
   <h1>CHOOSE A ROLE</h1>
@@ -24,6 +29,7 @@
   </div>
 
   <div id="hero-info">
+    <button id="closeBtn" style="float: right;">✖</button>
     <h2 id="hero"></h2>
     <div class="hero-details">
       <img src="" alt="Hero Image" id="heroImg" />
