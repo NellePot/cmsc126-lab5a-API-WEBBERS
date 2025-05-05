@@ -79,13 +79,15 @@ async function showHeroesRole() {
         
         const dotaHeroRole = document.getElementById("dotaRole").value.trim().toLowerCase();
         const heroesWithRole = data.filter(h => h.roles.some(role => role.toLowerCase() === dotaHeroRole));
-        console.log(heroesWithRole);
-        if(heroesWithRole.length === 0){
-            throw new Error("No heroes found for this role.");
-        }
-    
         const container = document.getElementById("list-container");
         container.innerHTML = "";
+
+        const roleErrorMessage = document.getElementById("role-error");
+        roleErrorMessage.textContent = ""; 
+        if(heroesWithRole.length === 0){
+            roleErrorMessage.textContent = "Role not found.";
+            return;
+        }
 
         document.getElementById("role-id").innerText = dotaHeroRole.charAt(0).toUpperCase() + dotaHeroRole.slice(1);
 
@@ -107,6 +109,11 @@ async function showHeroesRole() {
             heroBox.appendChild(overlay);
             heroBox.appendChild(heroImg);
             container.appendChild(heroBox);
+
+            heroBox.onclick = () => {
+                displayHeroDetails(heroData);
+                topFunction();
+            };
         })
         
     } catch(error){
