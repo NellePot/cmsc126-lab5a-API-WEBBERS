@@ -1,8 +1,41 @@
 let allHeroData = []; 
 
+function displayHeroDetails(hero) { // function to get name, img, and role from hero data
+    const nameHero = hero.localized_name;
+    const imgHero = hero.img;
+    const roleHero = hero.roles;
+
+    const heroElement = document.getElementById("hero");
+    heroElement.textContent = nameHero;
+
+    const imgElement = document.getElementById("heroImg");
+    imgElement.src = `http://cdn.dota2.com/${imgHero}`;
+    imgElement.style.display = "block";
+
+    const roleElement = document.getElementById("rolesList");
+    roleElement.innerHTML = "";
+
+    roleHero.forEach(role => {
+        const roleItem = document.createElement("li");
+        roleItem.textContent = role;
+        roleElement.appendChild(roleItem);
+    });
+
+    document.getElementById("hero-info").style.display = "block";
+}
+
+function topFunction() {
+    document.documentElement.scrollTop = 0; 
+  }
+
+
 async function fetchData(){
     try{
         document.getElementById("hero-list").style.display = 'none'
+
+        //creates an error message
+        const errorMessage = document.getElementById("errorMssg");
+        errorMessage.textContent = ""; 
 
         // get hero name from input
         const dotaHeroName = document.getElementById("dotaHero").value.trim(); 
@@ -19,33 +52,12 @@ async function fetchData(){
         const hero = data.find(h => h.localized_name.toLowerCase() === dotaHeroName.toLowerCase()); 
         
         if(!hero){
-            throw new Error("Hero not found"); 
-        }
-
-        document.getElementById("hero-info").style.display = "block";
-    
-        // get name, img, and role from hero data
-        console.log(data); 
-        const nameHero = hero.localized_name
-        const imgHero = hero.img 
-        const roleHero = hero.roles
-
-        
-        const heroElement = document.getElementById("hero")
-        heroElement.textContent = nameHero
-
-        const imgElement = document.getElementById("heroImg");
-        imgElement.src = `http://cdn.dota2.com/${imgHero}`
-        imgElement.style.display ="block"; 
-
-        const roleElement = document.getElementById("rolesList");
-        roleElement.innerHTML = ""; 
-
-        roleHero.forEach(role => {
-            const roleItem = document.createElement("li");
-            roleItem.textContent = role; 
-            roleElement.appendChild(roleItem)
-        });
+            errorMessage.textContent = "Hero not found.";
+            document.getElementById("hero-info").style.display = "none"; //hides previous succesful search
+            return;
+          }
+      
+          displayHeroDetails(hero);
     }
     catch(error){
         console.error(error); 
@@ -135,10 +147,19 @@ async function showAllHeroes(){
             heroBox.appendChild(heroImg);
             heroBox.appendChild(overlay);
             container.appendChild(heroBox);
+
+            heroBox.onclick = () => {
+                displayHeroDetails(hero);
+                topFunction();
+            };
         });
     } catch(error){
         console.error(error); 
     }
 }
+
+document.getElementById("closeBtn").onclick = () => {
+    document.getElementById("hero-info").style.display = "none";
+};
 
 window.onload = showAllHeroes; 
