@@ -13,8 +13,14 @@
 
   <h1>CHOOSE YOUR HERO</h1>
   <div class="search-container">
-    <input type="text" id="dotaHero" placeholder="Enter Hero Name" />
-    <button onclick="fetchData()">Fetch Hero</button>
+    <input type="text" id="dotaHero" placeholder="Enter hero name" />
+    <button onclick="fetchData()">fetch</button>
+  </div>
+
+  <h1>CHOOSE A ROLE</h1>
+  <div class="search-container">
+    <input type="text" id="dotaRole" placeholder="Enter role..." />
+    <button onclick="showHeroesRole()">fetch</button>
   </div>
 
   <div id="hero-info">
@@ -26,7 +32,11 @@
       </div>
     </div>
   </div>
-  
+
+  <div id="hero-list">
+    <h2 id="role-id"></h2>
+    <div id="list-container"></div>
+  </div>
 
   <div class=allCharacters>
     <h2 style="text-align: center;">All Heroes</h2>
